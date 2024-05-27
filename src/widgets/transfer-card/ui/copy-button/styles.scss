@@ -1,0 +1,28 @@
+.copy-button {
+  border-radius: 8px;
+  padding: 3px 8px 5px 8px;
+  height: 24px;
+
+  cursor: pointer;
+
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 133%;
+  text-align: center;
+  color: #8375e9;
+
+  background: rgba(131, 117, 233, 0.1);
+
+  &:hover:not(&_copied) {
+    color: #ffffff;
+    background: #8375e9;
+  }
+
+  &_copied {
+    background: rgba(155, 216, 26, 0.1);
+    color: #9bd81a;
+
+    cursor: default;
+  }
+}
