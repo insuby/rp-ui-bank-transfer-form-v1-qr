@@ -17,6 +17,8 @@ import {
 import { Locales } from 'shared/locale';
 import { RoutesPath } from 'shared/routes-path';
 
+const ENV_PATH = process.env.REACT_APP_PAGE_URL;
+
 const LOCALES: Locale[] = [
   {
     language: 'en',
@@ -58,15 +60,13 @@ export const App = () => {
 const Pages = () => {
   const [searchParams] = useSearchParams();
   const language = getLanguageFromSearchParams(searchParams);
+  const path = ENV_PATH ? ENV_PATH : RoutesPath.PAYMENT;
 
   return (
     <TranslationsProvider language={language} locales={LOCALES}>
       <Routes>
-        <Route path={RoutesPath.PAYMENT} element={<PaymentPage />} />
-        <Route
-          path="*"
-          element={<Navigate replace to={RoutesPath.PAYMENT} />}
-        />
+        <Route path={path} element={<PaymentPage />} />
+        <Route path="*" element={<Navigate replace to={path} />} />
       </Routes>
     </TranslationsProvider>
   );

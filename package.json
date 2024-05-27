@@ -16,7 +16,6 @@
     "@eo-locale/core": "^1.7.2",
     "@eo-locale/react": "^1.7.3",
     "@tanstack/react-query": "^5.29.2",
-    "date-fns": "^3.6.0",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -59,5 +58,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "pnpm@8.15.1+sha1.8adba2d20330c02d3856e18c4eb3819d1d3ca6aa"
 }
