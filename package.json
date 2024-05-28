@@ -2,9 +2,10 @@
   "name": "rp-ui-bank-transfer-form-v1",
   "version": "0.1.0",
   "private": true,
+  "homepage": "bank_transfer",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && mkdir build/bank_transfer && mv build/static build/bank_transfer/static",
     "lint": "eslint src --fix && prettier --write src",
     "lint-staged": "eslint src --fix && prettier --write src",
     "prepare": "husky"
@@ -16,7 +17,6 @@
     "@eo-locale/core": "^1.7.2",
     "@eo-locale/react": "^1.7.3",
     "@tanstack/react-query": "^5.29.2",
-    "date-fns": "^3.6.0",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

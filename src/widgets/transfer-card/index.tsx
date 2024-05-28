@@ -1,33 +1,42 @@
 import './style.scss';
 
-import { addMinutes } from 'date-fns';
-
 import { Text } from '@eo-locale/react';
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
+
+import { TransferApi } from 'widgets/transfer-card/api';
+import { TransferCardData } from 'widgets/transfer-card/typings';
 
 import { BackButton, InfoItem, Timer } from './ui';
 
-export const TransferCard = () => {
+export const TransferCard = ({ data }: { data: TransferCardData }) => {
   const [copiedValue, setCopiedValue] = useState('');
   const [isInstructionVisible, setIsInstructionVisible] = useState(false);
-  const [isTransferSucceed, setIsTransferSucceed] = useState<
+  const [transferStatus, setTransferStatus] = useState<
     'succeed' | 'failed' | null
   >(null);
+
+  const onIveSentMutation = useMutation({
+    mutationFn: () => TransferApi.complete(data.invoiceId),
+    onSuccess: () => {
+      setTransferStatus('succeed');
+    },
+  });
 
   const onInstructionClick = () => {
     setIsInstructionVisible(!isInstructionVisible);
   };
 
   const onIveSentClick = () => {
-    setIsTransferSucceed('succeed');
+    onIveSentMutation.mutate();
   };
 
   const onTryAgainClick = () => {
-    setIsTransferSucceed(null);
+    setTransferStatus(null);
   };
 
   const onTimerFinish = () => {
-    setIsTransferSucceed('failed');
+    setTransferStatus('failed');
   };
 
   if (isInstructionVisible) {
@@ -61,7 +70,7 @@ export const TransferCard = () => {
     );
   }
 
-  if (isTransferSucceed === 'succeed') {
+  if (transferStatus === 'succeed') {
     return (
       <div className="transfer-card transfer-card_status transfer-card_status-succeed">
         <div className="transfer-card__header">
@@ -78,7 +87,7 @@ export const TransferCard = () => {
             copiedValue={copiedValue}
             setCopiedValue={setCopiedValue}
             heading={<Text id="card.invoiceId" />}
-            text="123234rw-1233erjf-er2342-234234d-3245234"
+            text={data.invoiceId}
           />
         </div>
         <div className="transfer-card__footer">
@@ -88,7 +97,7 @@ export const TransferCard = () => {
     );
   }
 
-  if (isTransferSucceed === 'failed') {
+  if (transferStatus === 'failed') {
     return (
       <div className="transfer-card transfer-card_status transfer-card_status-failed">
         <div className="transfer-card__header">
@@ -105,7 +114,7 @@ export const TransferCard = () => {
             copiedValue={copiedValue}
             setCopiedValue={setCopiedValue}
             heading={<Text id="card.invoiceId" />}
-            text="123234rw-1233erjf-er2342-234234d-3245234"
+            text={data.invoiceId}
           />
         </div>
         <div className="transfer-card__footer">
@@ -135,41 +144,37 @@ export const TransferCard = () => {
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.amount" />}
-          text={'10 000 USD'}
+          text={data.amount + ' ' + data.currency.name}
         />
         <InfoItem
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.beneficiaryName" />}
-          text={
-            'Simple solutions plus Co., Ltd.Office No. 161/51 Moo 10, Chalong Subdistrict, Mueang Phuket District Phuket 83130 '
-          }
+          text={data.nameAndAddress}
         />
         <InfoItem
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.beneficiaryBankName" />}
-          text={
-            'Kasikornbank.PCL Ha yeak Chalong Phuket branch 16/41-42 M. 8 T.Chalong A.Muang Phuket 83000'
-          }
+          text={data.bankName}
         />
         <InfoItem
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.beneficiaryBankAccount" />}
-          text={'Beneficiary’s bank account'}
+          text={data.account}
         />
         <InfoItem
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.beneficiaryBankSwift" />}
-          text={'KASITHBK'}
+          text={data.swiftCode ?? 'SWIFT'}
         />
         <InfoItem
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.paymentPurpose" />}
-          text={'Inv.:# D00001-15-0524  '}
+          text={`Inv.:# ${data.invoiceId}`}
         />
       </div>
       <div className="transfer-card__footer">
@@ -189,14 +194,18 @@ export const TransferCard = () => {
             </svg>
           </div>
           <div className="alert__text">
-            <Text id="footer.warning" html />
+            <Text id="footer.warning.first" />
+            &nbsp;
+            <span className="alert__accent">
+              {data.timerMinutes}&nbsp;
+              <Text id="footer.warning.second" />
+            </span>
+            <br />
+            <Text id="footer.warning.third" />
           </div>
         </div>
         <div className="transfer-card__actions">
-          <Timer
-            deadline={addMinutes(new Date(), 3)}
-            onFinish={onTimerFinish}
-          />
+          <Timer deadline={new Date(data.expiresIn)} onFinish={onTimerFinish} />
           <button className="transfer-card__button" onClick={onIveSentClick}>
             <Text id="footer.button" />
           </button>
