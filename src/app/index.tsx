@@ -8,7 +8,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 import {
   BrowserRouter,
-  Navigate,
   Route,
   Routes,
   useSearchParams,
@@ -66,7 +65,6 @@ const Pages = () => {
     <TranslationsProvider language={language} locales={LOCALES}>
       <Routes>
         <Route path={path} element={<PaymentPage />} />
-        <Route path="*" element={<Navigate replace to={path} />} />
       </Routes>
     </TranslationsProvider>
   );

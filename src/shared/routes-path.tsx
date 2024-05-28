@@ -1,3 +1,3 @@
 export const enum RoutesPath {
-  PAYMENT = '/bank/payment',
+  PAYMENT = '/bank_transfer/payment/:formId',
 }
