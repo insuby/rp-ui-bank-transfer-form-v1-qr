@@ -6,6 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && mkdir build/bank_transfer && mv build/static build/bank_transfer/static",
+    "build_win": "react-scripts build && mkdir build\\bank_transfer && move build\\static build\\bank_transfer\\static",
     "lint": "eslint src --fix && prettier --write src",
     "lint-staged": "eslint src --fix && prettier --write src",
     "prepare": "husky"
