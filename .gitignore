@@ -32,6 +32,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+#deploy
+deploy.bat
+deploy_prod.bat
+build.zip
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
