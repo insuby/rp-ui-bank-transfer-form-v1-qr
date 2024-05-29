@@ -15,6 +15,7 @@ type InfoItemProps = {
   text: string;
   copiedValue: string;
   setCopiedValue: Dispatch<SetStateAction<string>>;
+  textToCopy?: string;
 } & HTMLAttributes<HTMLDivElement>;
 
 export const InfoItem = ({
@@ -22,6 +23,7 @@ export const InfoItem = ({
   text,
   copiedValue,
   setCopiedValue,
+  textToCopy,
   className,
 }: InfoItemProps) => {
   return (
@@ -30,7 +32,7 @@ export const InfoItem = ({
       <p className="info-item__text">{text}</p>
       <div className="info-item__copy">
         <CopyButton
-          value={text}
+          value={textToCopy ?? text}
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
         />

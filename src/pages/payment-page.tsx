@@ -1,3 +1,5 @@
+import { cx } from '@emotion/css';
+
 import { TransferCard } from 'widgets';
 
 import { useQuery } from '@tanstack/react-query';
@@ -15,7 +17,20 @@ export const PaymentPage = () => {
     staleTime: Infinity,
   });
 
-  if (!data) return <div />;
+  if (!data)
+    return (
+      <div className="transfer-card">
+        <div
+          role="status"
+          className={cx(
+            'absolute m-auto inset-0 inline-block h-8 w-8 self-center',
+            'justify-self-center animate-spin rounded-full',
+            'border-4 border-solid border-current border-e-transparent',
+            'align-[-0.125em] text-surface text-[#8375E9]',
+          )}
+        />
+      </div>
+    );
 
   return <TransferCard data={data.data} />;
 };

@@ -5,8 +5,8 @@
   "homepage": "bank_transfer",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mkdir build/bank_transfer && mv build/static build/bank_transfer/static",
-    "build_win": "react-scripts build && mkdir build\\bank_transfer && move build\\static build\\bank_transfer\\static",
+    "build": "react-scripts build && mkdir build/bank_transfer && mv build/* build/bank_transfer",
+    "build_win": "react-scripts build && mkdir build\\bank_transfer && move build\\* build\\bank_transfer",
     "lint": "eslint src --fix && prettier --write src",
     "lint-staged": "eslint src --fix && prettier --write src",
     "prepare": "husky"
@@ -18,6 +18,7 @@
     "@eo-locale/core": "^1.7.2",
     "@eo-locale/react": "^1.7.3",
     "@tanstack/react-query": "^5.29.2",
+    "date-fns": "^3.6.0",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -47,6 +48,7 @@
     "husky": "^9.0.11",
     "prettier": "2.8.7",
     "sass": "^1.75.0",
+    "tailwindcss": "^3.4.3",
     "typescript": "^5.0.4"
   },
   "browserslist": {
