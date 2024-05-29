@@ -1,12 +1,12 @@
 import './style.scss';
 
-import { Text } from '@eo-locale/react';
+import { Numeric, Text } from '@eo-locale/react';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { TransferApi } from 'widgets/transfer-card/api';
-import { TransferCardData } from 'widgets/transfer-card/typings';
-
+import { TransferApi } from './api';
+import { normalizeAmount } from './lib';
+import { TransferCardData } from './typings';
 import { BackButton, InfoItem, Timer } from './ui';
 
 export const TransferCard = ({ data }: { data: TransferCardData }) => {
@@ -126,6 +126,8 @@ export const TransferCard = ({ data }: { data: TransferCardData }) => {
     );
   }
 
+  const normalizedAmount = normalizeAmount(data.amount, data.currency);
+
   return (
     <div className="transfer-card">
       <div className="transfer-card__header">
@@ -144,7 +146,18 @@ export const TransferCard = ({ data }: { data: TransferCardData }) => {
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.amount" />}
-          text={data.amount + ' ' + data.currency.name}
+          textToCopy={String(normalizedAmount)}
+          // @ts-expect-error
+          text={
+            <Numeric
+              currency={data.currency.code}
+              currencyDisplay="symbol"
+              maximumFractionDigits={data.currency.dimension ?? 0}
+              minimumFractionDigits={data.currency.dimension ?? 0}
+              style="currency"
+              value={normalizedAmount}
+            />
+          }
         />
         <InfoItem
           copiedValue={copiedValue}
