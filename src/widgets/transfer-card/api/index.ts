@@ -27,7 +27,7 @@ const mockData: { data: TransferCardData } = {
   },
 };
 
-const isTest = true;
+const isTest = false;
 
 export class TransferApi {
   static readonly KEY = 'transfer';
