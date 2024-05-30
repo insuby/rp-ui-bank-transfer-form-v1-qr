@@ -14,5 +14,4 @@ export type TransferCardData = {
   successUrl?: any;
   cancelUrl?: any;
   errorUrl?: any;
-  formId: string;
 };
