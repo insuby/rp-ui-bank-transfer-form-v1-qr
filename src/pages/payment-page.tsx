@@ -32,5 +32,5 @@ export const PaymentPage = () => {
       </div>
     );
 
-  return <TransferCard data={data.data} />;
+  return <TransferCard data={data.data} formId={formId} />;
 };

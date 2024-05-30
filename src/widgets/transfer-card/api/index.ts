@@ -1,7 +1,6 @@
 import type { TransferCardData } from '../typings';
 
-// @ts-ignore
-const mockData = {
+const mockData: { data: TransferCardData } = {
   data: {
     amount: 50000,
     currency: {
@@ -28,10 +27,16 @@ const mockData = {
   },
 };
 
+const isTest = false;
+
 export class TransferApi {
   static readonly KEY = 'transfer';
 
   static async init(formId: string): Promise<{ data: TransferCardData }> {
+    if (isTest) {
+      return mockData;
+    }
+
     return fetch(`/api/bank_transfer/v1/form/${formId}/init`, {
       method: 'POST',
     }).then((r) => r.json());

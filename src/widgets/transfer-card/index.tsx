@@ -9,7 +9,12 @@ import { normalizeAmount } from './lib';
 import { TransferCardData } from './typings';
 import { BackButton, InfoItem, Timer } from './ui';
 
-export const TransferCard = ({ data }: { data: TransferCardData }) => {
+type TransferCardProps = {
+  data: TransferCardData;
+  formId: string;
+};
+
+export const TransferCard = ({ data, formId }: TransferCardProps) => {
   const [copiedValue, setCopiedValue] = useState('');
   const [isInstructionVisible, setIsInstructionVisible] = useState(false);
   const [transferStatus, setTransferStatus] = useState<
@@ -17,7 +22,7 @@ export const TransferCard = ({ data }: { data: TransferCardData }) => {
   >(null);
 
   const onIveSentMutation = useMutation({
-    mutationFn: () => TransferApi.complete(data.invoiceId),
+    mutationFn: () => TransferApi.complete(formId),
     onSuccess: () => {
       setTransferStatus('succeed');
     },
@@ -87,7 +92,7 @@ export const TransferCard = ({ data }: { data: TransferCardData }) => {
             copiedValue={copiedValue}
             setCopiedValue={setCopiedValue}
             heading={<Text id="card.invoiceId" />}
-            text={data.formId}
+            text={formId}
           />
         </div>
         <div className="transfer-card__footer">
@@ -114,7 +119,7 @@ export const TransferCard = ({ data }: { data: TransferCardData }) => {
             copiedValue={copiedValue}
             setCopiedValue={setCopiedValue}
             heading={<Text id="card.invoiceId" />}
-            text={data.formId}
+            text={formId}
           />
         </div>
         <div className="transfer-card__footer">
