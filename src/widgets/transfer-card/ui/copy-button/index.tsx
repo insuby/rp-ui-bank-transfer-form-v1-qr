@@ -5,10 +5,10 @@ import { useCopyToClipboard } from 'usehooks-ts';
 import type { Dispatch, SetStateAction } from 'react';
 
 export const CopyButton = ({
-                             value,
-                             copiedValue,
-                             setCopiedValue,
-                           }: {
+  value,
+  copiedValue,
+  setCopiedValue,
+}: {
   value: string;
   copiedValue: string;
   setCopiedValue: Dispatch<SetStateAction<string>>;
