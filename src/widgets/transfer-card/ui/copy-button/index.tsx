@@ -1,15 +1,14 @@
 import './styles.scss';
-import { cx } from '@emotion/css';
 
 import { useCopyToClipboard } from 'usehooks-ts';
 
 import type { Dispatch, SetStateAction } from 'react';
 
 export const CopyButton = ({
-  value,
-  copiedValue,
-  setCopiedValue,
-}: {
+                             value,
+                             copiedValue,
+                             setCopiedValue,
+                           }: {
   value: string;
   copiedValue: string;
   setCopiedValue: Dispatch<SetStateAction<string>>;
@@ -25,14 +24,11 @@ export const CopyButton = ({
     copy('');
   };
 
-  return (
-    <span
-      className={cx('copy-button', {
-        'copy-button_copied': copiedValue === copied,
-      })}
-      onClick={onClick}
-    >
-      {copiedValue !== copied ? 'copy' : 'copied'}
+  return copiedValue !== copied ? (
+    <span className="copy-button" onClick={onClick}>
+      copy
     </span>
+  ) : (
+    <span className="copy-button copy-button_copied">copied</span>
   );
 };

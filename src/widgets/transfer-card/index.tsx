@@ -87,7 +87,7 @@ export const TransferCard = ({ data }: { data: TransferCardData }) => {
             copiedValue={copiedValue}
             setCopiedValue={setCopiedValue}
             heading={<Text id="card.invoiceId" />}
-            text={data.invoiceId}
+            text={data.formId}
           />
         </div>
         <div className="transfer-card__footer">
@@ -114,7 +114,7 @@ export const TransferCard = ({ data }: { data: TransferCardData }) => {
             copiedValue={copiedValue}
             setCopiedValue={setCopiedValue}
             heading={<Text id="card.invoiceId" />}
-            text={data.invoiceId}
+            text={data.formId}
           />
         </div>
         <div className="transfer-card__footer">
