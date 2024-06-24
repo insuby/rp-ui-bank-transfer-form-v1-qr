@@ -1,0 +1,2 @@
+/api/*  https://rp.sptnk.co/api/:splat  200
+/*  /  200

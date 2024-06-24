@@ -1,2 +1,2 @@
-/// <reference types="../src/shared/constants/typings" />
+/// <reference types="../src/shared/typings" />
 declare module '*.png';

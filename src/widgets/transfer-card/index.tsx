@@ -4,9 +4,11 @@ import { Numeric, Text } from '@eo-locale/react';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { SpbSvg } from 'widgets/transfer-card/spb-svg';
+
 import { TransferApi } from './api';
 import { normalizeAmount } from './lib';
-import { TransferCardData } from './typings';
+import type { TransferCardData } from './typings';
 import { BackButton, InfoItem, Timer } from './ui';
 
 type TransferCardProps = {
@@ -133,6 +135,112 @@ export const TransferCard = ({ data, formId }: TransferCardProps) => {
 
   const normalizedAmount = normalizeAmount(data.amount, data.currency);
 
+  if (data.paymentMethod === 'BANK_TRANSFER_QR_SBP') {
+    // @ts-ignore
+    const link = data.credentials.find(
+      (value) => value.credentialType === 'credential.link',
+    ).value;
+    // @ts-ignore
+    const image = data.credentials.find(
+      (value) => value.credentialType === 'credential.image',
+    ).value;
+
+    return (
+      <div className="transfer-card">
+        <div className="transfer-card__header transfer-card__header_sbp">
+          <SpbSvg />
+        </div>
+        <div className="transfer-card__body info">
+          <InfoItem
+            className="info-item_inverse"
+            copiedValue={copiedValue}
+            setCopiedValue={setCopiedValue}
+            heading={<Text id="cardSBP.invoiceId" />}
+            text={`Inv.:# ${data.invoiceId}`}
+          />
+          <InfoItem
+            className="info-item_inverse"
+            copiedValue={copiedValue}
+            setCopiedValue={setCopiedValue}
+            heading={<Text id="cardSBP.amount" />}
+            textToCopy={String(normalizedAmount)}
+            // @ts-expect-error
+            text={
+              <Numeric
+                currency={data.currency.code}
+                currencyDisplay="symbol"
+                maximumFractionDigits={data.currency.dimension ?? 0}
+                minimumFractionDigits={data.currency.dimension ?? 0}
+                style="currency"
+                value={normalizedAmount}
+              />
+            }
+          />
+
+          <div className="info-item">
+            <h5 className="info-item__heading">
+              <Text id="cardSBP.paymentMethod" html />
+            </h5>
+            <div className="info-item__text">
+              <p className="info-item__text-sub">
+                <span>-</span>
+                <span style={{ whiteSpace: 'pre-line' }}>
+                  <a
+                    className="info-item__text-link"
+                    href={link}
+                    target="_blank"
+                  >
+                    <Text id="cardSBP.paymentMethod.tap" html />
+                    &nbsp;
+                  </a>
+                  <Text id="cardSBP.paymentMethod.first" html />
+                </span>
+              </p>
+              <p className="info-item__text-sub">
+                <span>-</span>
+                <span style={{ whiteSpace: 'pre-line' }}>
+                  <Text id="cardSBP.paymentMethod.second" html />
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="transfer-card__qr">
+          <img src={image} alt="qr-photo" />
+        </div>
+        <div className="transfer-card__footer">
+          <div className="transfer-card__alert alert">
+            <div className="alert__text alert__text_sbp">
+              <Text id="cardSBP.footer.warning" />
+            </div>
+          </div>
+          <div className="transfer-card__actions">
+            <button className="transfer-card__button" onClick={onIveSentClick}>
+              <Text id="cardSBP.footer.button" />
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // @ts-ignore
+  const value = data.credentials.find(
+    (value) => value.credentialType === 'credential.value',
+  ).value;
+  // @ts-ignore
+  const bankName = data.credentials.find(
+    (value) => value.credentialType === 'credential.bank_name',
+  ).value;
+  // @ts-ignore
+  const swiftCode = data.credentials.find(
+    (value) => value.credentialType === 'credential.swift_code',
+  ).value;
+  // @ts-ignore
+  const owner = data.credentials.find(
+    (value) => value.credentialType === 'credential.owner',
+  ).value;
+
   return (
     <div className="transfer-card">
       <div className="transfer-card__header">
@@ -168,25 +276,25 @@ export const TransferCard = ({ data, formId }: TransferCardProps) => {
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.beneficiaryName" />}
-          text={data.nameAndAddress}
+          text={value}
         />
         <InfoItem
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.beneficiaryBankName" />}
-          text={data.bankName}
+          text={bankName}
         />
         <InfoItem
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.beneficiaryBankAccount" />}
-          text={data.account}
+          text={owner}
         />
         <InfoItem
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="card.beneficiaryBankSwift" />}
-          text={data.swiftCode ?? 'SWIFT'}
+          text={swiftCode ?? 'SWIFT'}
         />
         <InfoItem
           copiedValue={copiedValue}

@@ -35,6 +35,9 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-qr-code:
+    specifier: ^2.0.14
+    version: 2.0.14(react@18.2.0)
   react-router-dom:
     specifier: ^6.22.3
     version: 6.22.3(react-dom@18.2.0)(react@18.2.0)
@@ -8652,6 +8655,10 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     dev: false
 
+  /qr.js@0.0.0:
+    resolution: {integrity: sha512-c4iYnWb+k2E+vYpRimHqSu575b1/wKl4XFeJGpFmrJQz5I88v9aY2czh7s0w36srfCM1sXgC/xpoJz5dJfq+OQ==}
+    dev: false
+
   /qs@6.11.0:
     resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
     engines: {node: '>=0.6'}
@@ -8770,6 +8777,20 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: false
+
+  /react-qr-code@2.0.14(react@18.2.0):
+    resolution: {integrity: sha512-xvAUqmXzFzf7X6aQAAKb6T02YYk9grBBFeqpp1MiVhUAKG3Rg9+hFiOKRYg4+rWc2MiXNxkri0ulAJgS12xh7Q==}
+    peerDependencies:
+      react: '*'
+      react-native-svg: '*'
+    peerDependenciesMeta:
+      react-native-svg:
+        optional: true
+    dependencies:
+      prop-types: 15.8.1
+      qr.js: 0.0.0
+      react: 18.2.0
     dev: false
 
   /react-refresh@0.11.0:

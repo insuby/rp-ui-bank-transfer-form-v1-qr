@@ -44,8 +44,16 @@
     font-weight: 700;
     font-size: 12px;
     line-height: 100%;
-    text-transform: uppercase;
+    //text-transform: uppercase;
     color: #081420;
+
+    span {
+      font-family: var(--font-family);
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 143%;
+      color: #081420;
+    }
   }
 
   &__text {
@@ -58,6 +66,23 @@
 
     width: 80%;
     margin: 0;
+  }
+
+  &__text-sub {
+    display: flex;
+    column-gap: 8px;
+
+    &:last-child {
+      padding-top: 8px;
+    }
+  }
+
+  &__text-link {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 143%;
+    color: #8375e9;
   }
 
   &__copy {

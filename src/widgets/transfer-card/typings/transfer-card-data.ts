@@ -1,12 +1,8 @@
-import { Currency } from '../typings';
+import { Credential, Currency } from '../typings';
 
 export type TransferCardData = {
   amount: number;
   currency: Currency;
-  nameAndAddress: string;
-  bankName: string;
-  account: string;
-  swiftCode?: any;
   invoiceId: string;
   type: string;
   expiresIn: string;
@@ -14,4 +10,6 @@ export type TransferCardData = {
   successUrl?: any;
   cancelUrl?: any;
   errorUrl?: any;
+  paymentMethod: 'BANK_TRANSFER_V1' | 'BANK_TRANSFER_QR_SBP';
+  credentials: Credential[];
 };
