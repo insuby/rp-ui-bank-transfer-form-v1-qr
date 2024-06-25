@@ -11,6 +11,8 @@ import { normalizeAmount } from './lib';
 import type { TransferCardData } from './typings';
 import { BackButton, InfoItem, Timer } from './ui';
 
+import image from './photo.png';
+
 type TransferCardProps = {
   data: TransferCardData;
   formId: string;
@@ -136,15 +138,6 @@ export const TransferCard = ({ data, formId }: TransferCardProps) => {
   const normalizedAmount = normalizeAmount(data.amount, data.currency);
 
   if (data.paymentMethod === 'BANK_TRANSFER_QR_SBP') {
-    // @ts-ignore
-    const link = data.credentials.find(
-      (value) => value.credentialType === 'credential.link',
-    ).value;
-    // @ts-ignore
-    const image = data.credentials.find(
-      (value) => value.credentialType === 'credential.image',
-    ).value;
-
     return (
       <div className="transfer-card">
         <div className="transfer-card__header transfer-card__header_sbp">
@@ -187,7 +180,7 @@ export const TransferCard = ({ data, formId }: TransferCardProps) => {
                 <span style={{ whiteSpace: 'pre-line' }}>
                   <a
                     className="info-item__text-link"
-                    href={link}
+                    href="https://qr.nspk.ru/AS1A000TASPF08GG9E9RECI5QGHQHFDM?type=01&bank=100000000111&crc=923C"
                     target="_blank"
                   >
                     <Text id="cardSBP.paymentMethod.tap" html />
@@ -206,7 +199,9 @@ export const TransferCard = ({ data, formId }: TransferCardProps) => {
           </div>
         </div>
         <div className="transfer-card__qr">
-          <a className="info-item__text-link" href={link} target="_blank">
+          <a className="info-item__text-link"
+             href="https://qr.nspk.ru/AS1A000TASPF08GG9E9RECI5QGHQHFDM?type=01&bank=100000000111&crc=923C"
+             target="_blank">
             <img src={image} alt="qr-photo" />
           </a>
         </div>
