@@ -206,7 +206,9 @@ export const TransferCard = ({ data, formId }: TransferCardProps) => {
           </div>
         </div>
         <div className="transfer-card__qr">
-          <img src={image} alt="qr-photo" />
+          <a className="info-item__text-link" href={link} target="_blank">
+            <img src={image} alt="qr-photo" />
+          </a>
         </div>
         <div className="transfer-card__footer">
           <div className="transfer-card__alert alert">

@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 import {
   BrowserRouter,
+  Navigate,
   Route,
   Routes,
   useSearchParams,
@@ -15,8 +16,6 @@ import {
 
 import { Locales } from 'shared/locale';
 import { RoutesPath } from 'shared/routes-path';
-
-const ENV_PATH = process.env.REACT_APP_PAGE_URL;
 
 const LOCALES: Locale[] = [
   {
@@ -59,12 +58,15 @@ export const App = () => {
 const Pages = () => {
   const [searchParams] = useSearchParams();
   const language = getLanguageFromSearchParams(searchParams);
-  const path = ENV_PATH ? ENV_PATH : RoutesPath.PAYMENT;
 
   return (
     <TranslationsProvider language={language} locales={LOCALES}>
       <Routes>
-        <Route path={path} element={<PaymentPage />} />
+        <Route path={RoutesPath.PAYMENT} element={<PaymentPage />} />
+        <Route
+          path="*"
+          element={<Navigate replace to={RoutesPath.PAYMENT} />}
+        />
       </Routes>
     </TranslationsProvider>
   );

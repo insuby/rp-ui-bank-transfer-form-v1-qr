@@ -11,7 +11,7 @@ import type { TransferCardData } from 'widgets/transfer-card/typings';
 
 export const PaymentPage = () => {
   const { formId = '' } = useParams<{ formId: string }>();
-
+  console.log(1);
   const [shouldRefetch, setShouldRefetch] = useState(true);
 
   const { data, refetch } = useQuery<{ data: TransferCardData }>({
