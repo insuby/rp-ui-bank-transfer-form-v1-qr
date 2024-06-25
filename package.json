@@ -5,8 +5,7 @@
   "homepage": "bank_transfer",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mkdir build/bank_transfer && mv build/* build/bank_transfer",
-    "build_win": "react-scripts build && mkdir build\\bank_transfer && move build\\static build\\bank_transfer\\static && move build\\* build\\bank_transfer",
+    "build": "react-scripts build",
     "lint": "eslint src --fix && prettier --write src",
     "lint-staged": "eslint src --fix && prettier --write src",
     "prepare": "husky"
@@ -52,7 +51,6 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.0.4"
   },
-  "proxy": "https://rp.sptnk.co/",
   "browserslist": {
     "production": [
       ">0.2%",
