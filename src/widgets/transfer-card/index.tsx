@@ -85,9 +85,6 @@ export const TransferCard = ({ data, formId }: TransferCardProps) => {
             text={formId}
           />
         </div>
-        <div className="transfer-card__footer">
-          <Text id="status.success.footer" />
-        </div>
       </div>
     );
   }
