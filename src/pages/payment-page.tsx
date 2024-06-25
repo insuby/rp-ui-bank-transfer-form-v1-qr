@@ -3,19 +3,34 @@ import { cx } from '@emotion/css';
 import { TransferCard } from 'widgets';
 
 import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { TransferApi } from 'widgets/transfer-card/api';
-import { TransferCardData } from 'widgets/transfer-card/typings';
+import type { TransferCardData } from 'widgets/transfer-card/typings';
 
 export const PaymentPage = () => {
   const { formId = '' } = useParams<{ formId: string }>();
 
-  const { data } = useQuery<{ data: TransferCardData }>({
+  const [shouldRefetch, setShouldRefetch] = useState(true);
+
+  const { data, refetch } = useQuery<{ data: TransferCardData }>({
+    staleTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
     queryKey: [TransferApi.KEY],
     queryFn: () => TransferApi.init(formId),
-    staleTime: Infinity,
   });
+
+  useEffect(() => {
+    if (shouldRefetch && (!data || !data.data)) {
+      refetch().then((result) => {
+        if (result.data && result.data.data) {
+          setShouldRefetch(false);
+        }
+      });
+    }
+  }, [shouldRefetch, data, refetch]);
 
   if (!data)
     return (
