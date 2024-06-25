@@ -2,7 +2,6 @@
   "name": "rp-ui-bank-transfer-form-v1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "bank_transfer",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
