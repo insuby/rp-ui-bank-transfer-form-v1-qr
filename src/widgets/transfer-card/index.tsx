@@ -134,7 +134,7 @@ export const TransferCard = ({ data, formId }: TransferCardProps) => {
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
           heading={<Text id="cardSBP.invoiceId" />}
-          text={`Inv.:# ${data.invoiceId}`}
+          text={data.invoiceId}
         />
         <InfoItem
           className="info-item_inverse"
