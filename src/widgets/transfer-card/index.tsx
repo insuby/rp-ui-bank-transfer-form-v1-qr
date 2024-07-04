@@ -130,13 +130,6 @@ export const TransferCard = ({ data, formId }: TransferCardProps) => {
           className="info-item_inverse"
           copiedValue={copiedValue}
           setCopiedValue={setCopiedValue}
-          heading={<Text id="cardSBP.invoiceId" />}
-          text={data.invoiceId}
-        />
-        <InfoItem
-          className="info-item_inverse"
-          copiedValue={copiedValue}
-          setCopiedValue={setCopiedValue}
           heading={<Text id="cardSBP.amount" />}
           textToCopy={String(normalizedAmount)}
           // @ts-expect-error
